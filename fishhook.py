@@ -17,7 +17,7 @@ except:
     print(f"{Fore.RED}file path not specified")
     sys.exit(1)
 try:
-    chunk_duration = float(sys.argv[2])
+    chunk_duration = int(sys.argv[2])
 except:
     print(f"{Fore.RED}wrong chunk duration. {Fore.YELLOW}using default [{chunk_duration}]{Style.RESET_ALL}")
     #sys.exit(2)
@@ -45,7 +45,11 @@ def chunks(lst, n):
 handle = win32gui.FindWindow(None, "iaxRpt")
 if handle:
     # Extract data and sampling rate from a wav file
-    data, fs = sf.read(wavfile, dtype='float32')
+    try:
+        data, fs = sf.read(wavfile, dtype='float32')
+    except:
+        print(f"{Fore.RED}WAV file not found: {Fore.YELLOW}[{wavfile}]{Style.RESET_ALL}")
+        sys.exit(5)
     data_chunks = chunks(data,fs*chunk_duration)
     win32gui.SetForegroundWindow(handle)
     keyboard = Controller()
