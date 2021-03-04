@@ -9,6 +9,7 @@ pip install sounddevice<br/>
 pip install SoundFile<br/>
 pip install colorama<br/>
 pip install pynput<br/>
+pip install numpy<br/>
 <br/>
 usage<br/>
 -----<br/>
