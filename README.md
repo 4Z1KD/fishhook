@@ -13,10 +13,10 @@ pip install pynput<br/>
 usage<br/>
 -----<br/>
 fishhook.py expects 4 parameters:<br/>
-file_path - a path to a .wav file<br/>
-chunk_duration - the size of each chunk of the wav file to be played (in seconds) - default is 60<br/>
-delay - the time to wait between chunks (in seconds) - default is 5<br/>
-ptt_lagging - the time to wait between pressing the ptt and playing the chunk (in seconds) - default is 0.5<br/>
+1) file_path - a path to a .wav file<br/>
+2) chunk_duration - the size of each chunk of the wav file to be played (in seconds) - default is 60<br/>
+3) delay - the time to wait between chunks (in seconds) - default is 5<br/>
+4) ptt_lagging - the time to wait between pressing the ptt and playing the chunk (in seconds) - default is 0.5<br/>
 <br/>
 <br/>
 <br/>
