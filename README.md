@@ -26,6 +26,6 @@ output_device_id    output device id (fishhook.py -a for list of devices)
 
 help
 -----
-fishhook.py -h
+python fishhook.py -h
 
 </pre>
