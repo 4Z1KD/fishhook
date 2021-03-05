@@ -1,4 +1,4 @@
-# fishhook
+# fishhook ![alt text](https://raw.githubusercontent.com/4Z1KD/fishhook/main/fishhook48.png)
 <pre>
 this small script allows iaxRpt client users to semi-automate their broadcast system.
 it emulates the 'Ctrl' keypress that iaxRpt uses to activate the ptt.
