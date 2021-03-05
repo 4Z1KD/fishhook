@@ -26,6 +26,10 @@ download and unzip fishhook
 
 usage
 --------
+The best way is to use init_fishhook.bat - it contains all the required parameters.
+one thing to pay attention to - select the correct input and output audio device id.
+to get the list of devices, run: fishhook.py -a
+
 fishhook expects up to 8 parameters:
 input_device_id     input device id (fishhook.py -a for list of devices)
 output_device_id    output device id (fishhook.py -a for list of devices)
