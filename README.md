@@ -23,7 +23,7 @@ output_device_id    output device id (fishhook.py -a for list of devices)
 -c CHUNK            chunk length (default: 10s)
 -d DELAY            delay between chunck (default: 5s)
 -l LAG              ptt lagging (default: 0.5s)
--s COM[n]              serial port
+-s COM[n]           serial port
 --realptt           trigger a physical PTT over the serial port
 
 help
