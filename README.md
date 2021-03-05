@@ -13,8 +13,8 @@ finally, the user can redirect the audio through different audio devices.
 
 installation
 ---------------
-python -m venv c:\path_to_myenv
-cd c:\path_to_myenv
+create a virtual env: python -m venv c:\path_to_myenv
+add c:\path_to_myenv\Scripts to your system PATH
 activate
 pip install pywin32
 pip install sounddevice
@@ -22,6 +22,7 @@ pip install SoundFile
 pip install colorama
 pip install pynput
 pip install numpy
+download and unzip fishhook
 
 usage
 --------
