@@ -8,8 +8,7 @@ a delay between chunks can also configured.<br>
 a serial COM port may be set, if one wants to use a physical PTT.<br>
 finally, the user can redirect the audio through different audio devices.<br>
 <br>
-#installation 🎣
----------------<br>
+# installation 🎣<br>
 create a virtual env: python -m venv c:\path_to_myenv<br>
 add c:\path_to_myenv\Scripts to your system PATH<br>
 activate<br>
@@ -21,8 +20,7 @@ pip install pynput<br>
 pip install numpy<br>
 download and unzip fishhook<br>
 <br>
-#usage 🎣
---------<br>
+# usage 🎣<br>
 The best way is to use init_fishhook.bat - it contains all the required parameters.<br>
 one thing to pay attention to - select the correct input and output audio device id.<br>
 to get the list of devices, run: fishhook.py -a<br>
@@ -37,6 +35,5 @@ output_device_id    output device id (fishhook.py -a for list of devices)<br>
 -s COM[n]           serial port<br>
 --realptt           trigger a physical PTT over the serial port<br>
 <br>
-#help 🎣
------<br>
+# help 🎣<br>
 python fishhook.py -h<br>
