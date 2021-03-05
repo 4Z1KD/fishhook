@@ -11,7 +11,7 @@ finally, the user can redirect the audio through different audio devices.
 <p/>
 <pre>
 
-installation
+installation :fishing_pole_and_fish:
 ---------------
 create a virtual env: python -m venv c:\path_to_myenv
 add c:\path_to_myenv\Scripts to your system PATH
@@ -24,7 +24,7 @@ pip install pynput
 pip install numpy
 download and unzip fishhook
 
-usage
+usage :fishing_pole_and_fish:
 --------
 The best way is to use init_fishhook.bat - it contains all the required parameters.
 one thing to pay attention to - select the correct input and output audio device id.
@@ -40,7 +40,7 @@ output_device_id    output device id (fishhook.py -a for list of devices)
 -s COM[n]           serial port
 --realptt           trigger a physical PTT over the serial port
 
-help
+help :fishing_pole_and_fish:
 -----
 python fishhook.py -h
 
