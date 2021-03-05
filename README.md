@@ -1,5 +1,5 @@
 # fishhook ![alt text](https://raw.githubusercontent.com/4Z1KD/fishhook/main/fishhook48.png)
-<pre>
+<code>
 this small script allows iaxRpt client users to semi-automate their broadcast system.
 it emulates the 'Ctrl' keypress that iaxRpt uses to activate the ptt.
 it also splices the input .wav file to a fixed-size chunks so that it does not
@@ -7,9 +7,9 @@ exceed the local repeater timeout timer.
 a delay between chunks can also configured.
 a serial COM port may be set, if one wants to use a physical PTT.
 finally, the user can redirect the audio through different audio devices.
-</pre>
+</code>
 <p/>
-<pre>
+<code>
 
 installation 🎣
 ---------------
@@ -44,4 +44,4 @@ help 🎣
 -----
 python fishhook.py -h
 
-</pre>
+</code>
