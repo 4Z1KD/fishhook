@@ -9,6 +9,7 @@ finally, the user can redirect the audio through different audio devices.
 </pre>
 <p/>
 <pre>
+
 installation
 ---------------
 python -m venv c:\path_to_myenv
