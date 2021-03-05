@@ -1,4 +1,4 @@
 @echo off
-REM start cmd /k "activate & cd /d [PATH_TO_FOLDER] & python fishhook.py [WAV_FILE_NAME] [CHUNK_DURATION] [DELAY] [PTT_LAGGING]"
-start cmd /k "activate & cd /d C:\Users\gill\Documents\Projects\fishhook & python fishhook.py tx.wav 60 5 0.5"
-REM exit
+REM start cmd /k "activate & cd /d C:\[PATH_TO_PROJECT_FOLDER]\fishhook & python fishhook.py -h & python fishhook.py -f x.wav -c 11 -d 6 -l 0.5 2 10"
+start cmd /k "activate & cd /d C:\Users\Gil\Documents\Projects\fishhook & python fishhook.py -h & python fishhook.py -f x.wav -c 11 -d 6 -l 0.5 2 10"
+exit
