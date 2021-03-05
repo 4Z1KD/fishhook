@@ -11,13 +11,18 @@ pip install colorama<br/>
 pip install pynput<br/>
 pip install numpy<br/>
 <br/>
-usage<br/>
------<br/>
-fishhook.py expects 4 parameters:<br/>
-1) file_path - a path to a .wav file<br/>
-2) chunk_duration - the size of each chunk of the wav file to be played (in seconds) - default is 60<br/>
-3) delay - the time to wait between chunks (in seconds) - default is 5<br/>
-4) ptt_lagging - the time to wait between pressing the ptt and playing the chunk (in seconds) - default is 0.5<br/>
+usage: fishhook.py [-h] [-f PATH] [-c CHUNK] [-d DELAY] [-l LAG] input_device output_device<br/>
+<br/>
+positional arguments:<br/>
+  input_device   input device<br/>
+  output_device  output device<br/>
+<br/>
+optional arguments:<br/>
+  -h, --help     show this help message and exit<br/>
+  -f PATH        path to the .wav file (default: tx.wav)<br/>
+  -c CHUNK       chunk length (default: 10s)<br/>
+  -d DELAY       delay between chunck (default: 5s)<br/>
+  -l LAG         ptt lagging (default: 0.5s)<br/>
 <br/>
 <br/>
 <br/>
