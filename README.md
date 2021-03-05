@@ -26,14 +26,16 @@ one thing to pay attention to - select the correct input and output audio device
 to get the list of devices, run: fishhook.py -a<br>
 <br>
 fishhook expects up to 8 parameters:<br>
-input_device_id     input device id (fishhook.py -a for list of devices)<br>
-output_device_id    output device id (fishhook.py -a for list of devices)<br>
--f PATH             path to the .wav file (default: tx.wav)<br>
--c CHUNK            chunk length (default: 10s)<br>
--d DELAY            delay between chunck (default: 5s)<br>
--l LAG              ptt lagging (default: 0.5s)<br>
--s COM[n]           serial port<br>
---realptt           trigger a physical PTT over the serial port<br>
+<table>
+  <tr><td>input_device_id</td><td>input device id (fishhook.py -a for list of devices)</td></tr>
+  <tr><td>output_device_id</td><td>output device id (fishhook.py -a for list of devices)</td></tr>
+  <tr><td>-f PATH</td><td>path to the .wav file (default: tx.wav)</td></tr>
+  <tr><td>-c CHUNK</td><td>chunk length (default: 10s)</td></tr>
+  <tr><td>-d DELAY</td><td>delay between chunck (default: 5s)</td></tr>
+  <tr><td>-l LAG</td><td>ptt lagging (default: 0.5s)</td></tr>
+  <tr><td>-s COM[n]</td><td>serial port</td></tr>
+  <tr><td>--realptt</td><td>trigger a physical PTT over the serial port</td></tr>
+</table>
 <br>
 # help 🎣<br>
 python fishhook.py -h<br>
