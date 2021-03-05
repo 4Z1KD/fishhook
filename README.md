@@ -11,8 +11,8 @@ finally, the user can redirect the audio through different audio devices.
 <pre>
 installation
 ---------------
-python -m venv c:\path\to\myenv
-cd c:\path\to\myenv
+python -m venv c:\path_to_myenv
+cd c:\path_to_myenv
 activate
 pip install pywin32
 pip install sounddevice
