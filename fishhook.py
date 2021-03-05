@@ -11,17 +11,22 @@ import argparse
 init()
 
 # Instantiate the parser
-parser = argparse.ArgumentParser(description='iaxRpt broadcast')
+parser = argparse.ArgumentParser(add_help=False)
+parser.add_argument('-a', '--list-devices', action='store_true', help='show list of audio devices and exit')
+args, remaining = parser.parse_known_args()
+if args.list_devices:
+    print("\naudio devices:")
+    print(sd.query_devices())
+    parser.exit(0)
+parser = argparse.ArgumentParser(description='iaxRpt broadcast', formatter_class=argparse.RawDescriptionHelpFormatter, parents=[parser])
 parser.add_argument('input_device', type=int, help='input device')
 parser.add_argument('output_device', type=int, help='output device')
 parser.add_argument('-f', metavar='PATH', type=str, help='path to the .wav file (default: %(default)s)', dest="wavfile", default="tx.wav")
 parser.add_argument('-c', metavar='CHUNK', type=int, help='chunk length (default: %(default)ss)', dest="chunk_duration", default=10)
 parser.add_argument('-d', metavar='DELAY', type=int, help='delay between chunck (default: %(default)ss)', dest="delay", default=5)
 parser.add_argument('-l', metavar='LAG', type=float, help='ptt lagging (default: %(default)ss)', dest="ptt_lagging", default=0.5)
-args = parser.parse_args()
+args = parser.parse_args(remaining)
 
-print("\naudio devices:")
-print(sd.query_devices())
 sd.default.device = args.input_device,args.output_device
 
 print(f"{Fore.GREEN}file path:\t{args.wavfile}{Style.RESET_ALL}")
