@@ -37,5 +37,6 @@ fishhook expects up to 8 parameters:<br>
   <tr><td>--realptt</td><td>trigger a physical PTT over the serial port</td></tr>
 </table>
 <br>
-# help 🎣<br>
+
+# help🎣<br>
 python fishhook.py -h<br>
