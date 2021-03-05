@@ -1,7 +1,7 @@
 # fishhook
 iaxRpt broadcast
 
-<block>
+<pre>
 installation
 ---------------
 python -m venv c:\path\to\myenv
@@ -23,4 +23,4 @@ output_device   output device
 -c CHUNK    chunk length (default: 10s)
 -d DELAY    delay between chunck (default: 5s)
 -l LAG    ptt lagging (default: 0.5s)
-</block>
+</pre>
