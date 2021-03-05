@@ -17,8 +17,8 @@ pip install numpy
 usage
 --------
 fishhook expects 6 parameters:
-input_device_id        input device
-output_device_id       output device
+input_device_id     input device id (fishhook.py -a for list of devices)
+output_device_id    output device id (fishhook.py -a for list of devices)
 -f PATH             path to the .wav file (default: tx.wav)
 -c CHUNK            chunk length (default: 10s)
 -d DELAY            delay between chunck (default: 5s)
