@@ -19,15 +19,15 @@ if args.list_devices:
     print(sd.query_devices())
     parser.exit(0)
 parser = argparse.ArgumentParser(description='iaxRpt broadcast', formatter_class=argparse.RawDescriptionHelpFormatter, parents=[parser])
-parser.add_argument('input_device', type=int, help='input device')
-parser.add_argument('output_device', type=int, help='output device')
-parser.add_argument('-f', metavar='PATH', type=str, help='path to the .wav file (default: %(default)s)', dest="wavfile", default="tx.wav")
-parser.add_argument('-c', metavar='CHUNK', type=int, help='chunk length (default: %(default)ss)', dest="chunk_duration", default=10)
+parser.add_argument('input_device_id', type=int, help='input device id (fishhook.py -a for list of devices)')
+parser.add_argument('output_device_id', type=int, help='output device id (fishhook.py -a for list of devices)')
+parser.add_argument('-f', metavar='FILE_PATH', type=str, help='path to the .wav file (default: %(default)s)', dest="wavfile", default="tx.wav")
+parser.add_argument('-c', metavar='CHUNK_DURATION', type=int, help='chunk length (default: %(default)ss)', dest="chunk_duration", default=10)
 parser.add_argument('-d', metavar='DELAY', type=int, help='delay between chunck (default: %(default)ss)', dest="delay", default=5)
 parser.add_argument('-l', metavar='LAG', type=float, help='ptt lagging (default: %(default)ss)', dest="ptt_lagging", default=0.5)
 args = parser.parse_args(remaining)
 
-sd.default.device = args.input_device,args.output_device
+sd.default.device = args.input_device_id,args.output_device_id
 
 print(f"{Fore.GREEN}file path:\t{args.wavfile}{Style.RESET_ALL}")
 print(f"{Fore.GREEN}chunk duration:\t{args.chunk_duration}{Style.RESET_ALL}")
