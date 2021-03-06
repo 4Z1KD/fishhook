@@ -17,6 +17,7 @@ pip install sounddevice<br>
 pip install SoundFile<br>
 pip install colorama<br>
 pip install pynput<br>
+pip install pyserial<br>
 pip install numpy<br>
 download and unzip fishhook<br>
 <br>
