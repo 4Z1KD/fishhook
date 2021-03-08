@@ -1,6 +1,6 @@
 # fishhook ![alt text](https://raw.githubusercontent.com/4Z1KD/fishhook/main/fishhook48.png)
 
-this small script allows iaxRpt client users to semi-automate their broadcast system.<br>
+this small script supports broadcating an audio file through 2 different paths: iaxRpt client or physical PTT<br>
 it emulates the 'Ctrl' keypress that iaxRpt uses to activate the ptt.<br>
 it also splices the input .wav file to a fixed-size chunks so that it does not
 exceed the local repeater timeout timer.<br>
