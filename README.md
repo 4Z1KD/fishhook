@@ -35,7 +35,7 @@ fishhook expects up to 8 parameters:<br>
   <tr><td>-d DELAY</td><td>delay between chunck (default: 5s)</td></tr>
   <tr><td>-l LAG</td><td>ptt lagging (default: 0.5s)</td></tr>
   <tr><td>-s COM[n]</td><td>serial port</td></tr>
-  <tr><td>--realptt</td><td>trigger a physical PTT over the serial port</td></tr>
+  <tr><td>-mode</td><td>choose between physical PTT and iaxRpt client</td></tr>
 </table>
 <br>
 
