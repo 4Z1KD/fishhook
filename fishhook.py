@@ -27,7 +27,7 @@ parser.add_argument('-c', metavar='CHUNK_DURATION', type=int, help='chunk length
 parser.add_argument('-d', metavar='DELAY', type=int, help='delay between chunck (default: %(default)ss)', dest="delay", default=5)
 parser.add_argument('-l', metavar='LAG', type=float, help='ptt lagging (default: %(default)ss)', dest="ptt_lagging", default=0.5)
 parser.add_argument('-s', metavar='COM[n]', type=str, help='serial port', dest="serial_port")
-parser.add_argument('--realptt', action='store_true', help='trigger a physical PTT over the serial port')
+parser.add_argument('-mode', type=str.upper, help='PTT for physical ptt, IAXRPT from iaxRpt client', dest="mode", default="IAXRPT", choices=["PTT", "IAXRPT"])
 args = parser.parse_args(remaining)
 
 sd.default.device = args.input_device_id,args.output_device_id
@@ -36,30 +36,39 @@ print(f"{Fore.GREEN}file path:\t{args.wavfile}{Style.RESET_ALL}")
 print(f"{Fore.GREEN}chunk duration:\t{args.chunk_duration}{Style.RESET_ALL}")
 print(f"{Fore.GREEN}delay:\t\t{args.delay}{Style.RESET_ALL}")
 print(f"{Fore.GREEN}ptt lagging:\t{args.ptt_lagging}{Style.RESET_ALL}")
+print(f"{Fore.GREEN}COM port:\t{args.serial_port}{Style.RESET_ALL}")
+print(f"{Fore.GREEN}mode:\t{args.mode}{Style.RESET_ALL}")
 
 physical_port = False
-if args.realptt and args.serial_port:
+iaxrpt_client = False
+
+if args.mode.upper() == "PTT" and args.serial_port:
     try:
         ser = serial.Serial(args.serial_port)
         ser.setRTS(False)
         physical_port = True
     except SerialException:
         physical_port = False
-        print(f"{Fore.YELLOW}failed to open '{args.serial_port}'. check device manager for the correct port.{Style.RESET_ALL}")        
+        print(f"{Fore.YELLOW}failed to open '{args.serial_port}'. check device manager for the correct port.{Style.RESET_ALL}")
+elif args.mode.upper() == "PTT" and not args.serial_port:
+    print(f"{Fore.YELLOW}ptt mode was selected but no COM port was set.{Style.RESET_ALL}")
+
+if args.mode.upper() == "IAXRPT":
+    handle = win32gui.FindWindow(None, "iaxRpt")
+    if handle:
+        win32gui.SetForegroundWindow(handle)
+        iaxrpt_client = True
+    else:
+        iaxrpt_client = False
+        print(f"{Fore.YELLOW}could not find an instance of iaxRpt. did you forget to run it?{Style.RESET_ALL}")
 
 # Yield successive n-sized chunks from lst
 def chunks(lst, n):
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
 
-handle = win32gui.FindWindow(None, "iaxRpt")
 try:
-    if handle:
-        win32gui.SetForegroundWindow(handle)
-    else:
-        print(f"{Fore.YELLOW}could not find an instance of iaxRpt. did you forget to run it?{Style.RESET_ALL}")
-    
-    if handle or physical_port:
+    if physical_port or iaxrpt_client:
         # Extract data and sampling rate from a wav file
         data, fs = sf.read(args.wavfile, dtype='float32')
         data_chunks = chunks(data,fs*args.chunk_duration)
@@ -68,18 +77,24 @@ try:
         for chunk in data_chunks:
             print(f"playing {int(math.ceil(i*args.chunk_duration + len(chunk)/fs))}/{int(math.ceil(len(data)/fs))} sec", end ="\r") 
             i+=1
+
             if physical_port:
                 ser.setRTS(True)
-            keyboard.press(Key.ctrl)
+            if iaxrpt_client:
+                keyboard.press(Key.ctrl)
+
             time.sleep(args.ptt_lagging)
             sd.play(chunk, fs)
             status = sd.wait()  # Wait until file is done playing
-            keyboard.release(Key.ctrl)
+
+            if iaxrpt_client:
+                keyboard.release(Key.ctrl)
             if physical_port:
                 ser.setRTS(False)
+
             time.sleep(args.delay)
-    else:
-        print(f"{Fore.LIGHTRED_EX}both physical interface and iaxRpt are not available{Style.RESET_ALL}")
+    #else:
+        #print(f"{Fore.LIGHTRED_EX}both physical interface and iaxRpt are not available{Style.RESET_ALL}")
     
 except KeyboardInterrupt:
     print('\nInterrupted by user')
