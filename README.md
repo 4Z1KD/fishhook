@@ -1,7 +1,8 @@
 # fishhook ![alt text](https://raw.githubusercontent.com/4Z1KD/fishhook/main/fishhook48.png)
 
-this small script supports broadcating an audio file through 2 different paths: iaxRpt client or physical PTT<br>
-it emulates the 'Ctrl' keypress that iaxRpt uses to activate the ptt.<br>
+this small script supports broadcating an audio file through 2 different paths: external client or physical PTT<br>
+if iaxRpt client is selected, it emulates the 'Ctrl' keypress to activate the ptt.<br>
+if DUDE-Star client is selected, it emulates the 'Space' keypress to activate the ptt.<br>
 it also splices the input .wav file to a fixed-size chunks so that it does not
 exceed the local repeater timeout timer.<br>
 a delay between chunks can also configured.<br>
@@ -35,7 +36,7 @@ fishhook expects up to 8 parameters:<br>
   <tr><td>-d DELAY</td><td>delay between chunck (default: 5s)</td></tr>
   <tr><td>-l LAG</td><td>ptt lagging (default: 0.5s)</td></tr>
   <tr><td>-s COM[n]</td><td>serial port</td></tr>
-  <tr><td>-mode</td><td>choose between physical PTT and iaxRpt client</td></tr>
+  <tr><td>-mode</td><td>choose between physical PTT / iaxRpt client / DUDE-Star client</td></tr>
 </table>
 <br>
 
