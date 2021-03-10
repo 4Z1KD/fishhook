@@ -26,7 +26,7 @@ parser.add_argument('-f', metavar='FILE_PATH', type=str, help='path to the .wav 
 parser.add_argument('-c', metavar='CHUNK_DURATION', type=int, help='chunk length (default: %(default)ss)', dest="chunk_duration", default=10)
 parser.add_argument('-d', metavar='DELAY', type=int, help='delay between chunck (default: %(default)ss)', dest="delay", default=5)
 parser.add_argument('-l', metavar='LAG', type=float, help='ptt lagging (default: %(default)ss)', dest="ptt_lagging", default=0.5)
-parser.add_argument('-s', metavar='COM[n]', type=str, help='serial port', dest="serial_port")
+parser.add_argument('-s', metavar='COM[n]', nargs='?', type=str, help='serial port', dest="serial_port")
 parser.add_argument('-mode', type=str.upper, help='PTT for physical ptt, IAXRPT from iaxRpt client', dest="mode", default="IAXRPT", choices=["PTT", "IAXRPT", "DUDE"])
 args = parser.parse_args(remaining)
 
@@ -71,6 +71,11 @@ elif args.mode.upper() == "DUDE":
         dude_client = False
         print(f"{Fore.YELLOW}could not find an instance of DUDE-Star. did you forget to run it?{Style.RESET_ALL}")
 
+# print(f"Modes:")
+# print(f"{Fore.GREEN}PTT:\t{physical_port}{Style.RESET_ALL}")
+# print(f"{Fore.GREEN}IAXRPT:\t{iaxrpt_client}{Style.RESET_ALL}")
+# print(f"{Fore.GREEN}DUDE:\t{dude_client}{Style.RESET_ALL}")
+
 # Yield successive n-sized chunks from lst
 def chunks(lst, n):
     for i in range(0, len(lst), n):
@@ -89,9 +94,9 @@ try:
 
             if physical_port:
                 ser.setRTS(True)
-            if iaxrpt_client:
+            elif iaxrpt_client:
                 keyboard.press(Key.ctrl)
-            if dude_client:
+            elif dude_client:
                 keyboard.press(Key.space)
 
             time.sleep(args.ptt_lagging)
@@ -100,9 +105,9 @@ try:
 
             if dude_client:
                 keyboard.release(Key.space)
-            if iaxrpt_client:
+            elif iaxrpt_client:
                 keyboard.release(Key.ctrl)
-            if physical_port:
+            elif physical_port:
                 ser.setRTS(False)
 
             time.sleep(args.delay)
