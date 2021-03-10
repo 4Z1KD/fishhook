@@ -27,7 +27,7 @@ parser.add_argument('-c', metavar='CHUNK_DURATION', type=int, help='chunk length
 parser.add_argument('-d', metavar='DELAY', type=int, help='delay between chunck (default: %(default)ss)', dest="delay", default=5)
 parser.add_argument('-l', metavar='LAG', type=float, help='ptt lagging (default: %(default)ss)', dest="ptt_lagging", default=0.5)
 parser.add_argument('-s', metavar='COM[n]', type=str, help='serial port', dest="serial_port")
-parser.add_argument('-mode', type=str.upper, help='PTT for physical ptt, IAXRPT from iaxRpt client', dest="mode", default="IAXRPT", choices=["PTT", "IAXRPT"])
+parser.add_argument('-mode', type=str.upper, help='PTT for physical ptt, IAXRPT from iaxRpt client', dest="mode", default="IAXRPT", choices=["PTT", "IAXRPT", "DUDE"])
 args = parser.parse_args(remaining)
 
 sd.default.device = args.input_device_id,args.output_device_id
@@ -41,19 +41,20 @@ print(f"{Fore.GREEN}mode:\t{args.mode}{Style.RESET_ALL}")
 
 physical_port = False
 iaxrpt_client = False
+dude_client = False
 
-if args.mode.upper() == "PTT" and args.serial_port:
-    try:
-        ser = serial.Serial(args.serial_port)
-        ser.setRTS(False)
-        physical_port = True
-    except SerialException:
-        physical_port = False
-        print(f"{Fore.YELLOW}failed to open '{args.serial_port}'. check device manager for the correct port.{Style.RESET_ALL}")
-elif args.mode.upper() == "PTT" and not args.serial_port:
-    print(f"{Fore.YELLOW}ptt mode was selected but no COM port was set.{Style.RESET_ALL}")
-
-if args.mode.upper() == "IAXRPT":
+if args.mode.upper() == "PTT":
+    if args.serial_port:
+        try:
+            ser = serial.Serial(args.serial_port)
+            ser.setRTS(False)
+            physical_port = True
+        except SerialException:
+            physical_port = False
+            print(f"{Fore.YELLOW}failed to open '{args.serial_port}'. check device manager for the correct port.{Style.RESET_ALL}")
+    else:
+        print(f"{Fore.YELLOW}ptt mode was selected but no COM port was set.{Style.RESET_ALL}")
+elif args.mode.upper() == "IAXRPT":
     handle = win32gui.FindWindow(None, "iaxRpt")
     if handle:
         win32gui.SetForegroundWindow(handle)
@@ -61,6 +62,14 @@ if args.mode.upper() == "IAXRPT":
     else:
         iaxrpt_client = False
         print(f"{Fore.YELLOW}could not find an instance of iaxRpt. did you forget to run it?{Style.RESET_ALL}")
+elif args.mode.upper() == "DUDE":
+    handle = win32gui.FindWindow(None, "DUDE-Star")
+    if handle:
+        win32gui.SetForegroundWindow(handle)
+        dude_client = True
+    else:
+        dude_client = False
+        print(f"{Fore.YELLOW}could not find an instance of DUDE-Star. did you forget to run it?{Style.RESET_ALL}")
 
 # Yield successive n-sized chunks from lst
 def chunks(lst, n):
@@ -68,7 +77,7 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 try:
-    if physical_port or iaxrpt_client:
+    if physical_port or iaxrpt_client or dude_client:
         # Extract data and sampling rate from a wav file
         data, fs = sf.read(args.wavfile, dtype='float32')
         data_chunks = chunks(data,fs*args.chunk_duration)
@@ -82,11 +91,15 @@ try:
                 ser.setRTS(True)
             if iaxrpt_client:
                 keyboard.press(Key.ctrl)
+            if dude_client:
+                keyboard.press(Key.space)
 
             time.sleep(args.ptt_lagging)
             sd.play(chunk, fs)
             status = sd.wait()  # Wait until file is done playing
 
+            if dude_client:
+                keyboard.release(Key.space)
             if iaxrpt_client:
                 keyboard.release(Key.ctrl)
             if physical_port:
