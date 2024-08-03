@@ -1,0 +1,7 @@
+pywin32
+sounddevice
+SoundFile
+colorama
+pynput
+pyserial
+numpy
