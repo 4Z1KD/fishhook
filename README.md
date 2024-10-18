@@ -5,7 +5,7 @@ if iaxRpt client is selected, it emulates the 'Ctrl' keypress to activate the pt
 if DUDE-Star client is selected, it emulates the 'Space' keypress to activate the ptt.<br>
 it also splices the input .wav file to a fixed-size chunks so that it does not
 exceed the local repeater timeout timer.<br>
-a delay between chunks can also configured.<br>
+a delay between chunks can also be configured.<br>
 a serial COM port may be set, if one wants to use a physical PTT.<br>
 finally, the user can redirect the audio through different audio devices.<br>
 <br>
